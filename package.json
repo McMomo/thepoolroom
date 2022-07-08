@@ -1,0 +1,22 @@
+{
+  "name": "thepoolroom",
+  "version": "0.0.1",
+  "description": "Art project for friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McMomo/thepoolroom.git"
+  },
+  "keywords": [
+    "art"
+  ],
+  "author": "Max Erkel & Moritz Bantleon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/McMomo/thepoolroom/issues"
+  },
+  "homepage": "https://github.com/McMomo/thepoolroom#readme"
+}
