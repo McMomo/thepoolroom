@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Art project for friends",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "generateData": "node --experimental-modules ./src/generateData.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/McMomo/thepoolroom/issues"
   },
-  "homepage": "https://github.com/McMomo/thepoolroom#readme"
+  "homepage": "https://github.com/McMomo/thepoolroom#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.1",
+    "prettier": "^2.7.1"
+  }
 }
