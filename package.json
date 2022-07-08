@@ -4,7 +4,8 @@
   "description": "Art project for friends",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "repository": {
     "type": "git",
