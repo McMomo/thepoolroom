@@ -23,6 +23,7 @@
   "homepage": "https://github.com/McMomo/thepoolroom#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "lowdb": "^3.0.0",
     "qrcode": "^1.5.0"
   },
   "devDependencies": {

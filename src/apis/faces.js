@@ -5,19 +5,19 @@
 // Gives you a random image URL as JSON
 // https://100k-faces.glitch.me/random-image-url
 
-import axios from 'axios';
+import axios from "axios";
 
 async function getFaces(amount) {
   let response = [];
   for (let i = 0; i < amount; i++) {
     try {
       axios
-        .get('https://100k-faces.glitch.me/random-image-url')
+        .get("https://100k-faces.glitch.me/random-image-url")
         .then((resp) => {
           response.push(resp.data.url);
         });
     } catch (err) {
-      console.log('An error has occoured while generating faces', err);
+      console.log("An error has occoured while generating faces", err);
     }
   }
   return response;
