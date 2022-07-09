@@ -5,6 +5,8 @@ import getFaces from './apis/faces.js';
 let totalEntries = 0;
 const targetEntries = 10;
 
+let i = 0;
+
 async function generateData() {
   // Use JSON file for storage
   const file = './_data/db.json';
@@ -29,14 +31,19 @@ async function generateData() {
   );
 
   //get a random face image
-  const face = getFaces();
-
+  const face = await getFaces();
+  console.log(face)
   //generate personal Data json
   //TODO: Facial Recognition
-  const payload = await getPersonalData('male', 21, 56, face);
+  //const payload = await getPersonalData('male', 21, 56, face);
+  const payload ={
+    id : i++,
+    imgURI : face
 
+  }
   // You can also use this syntax if you prefer
   const { persons } = db.data;
+  console.log(payload)
   persons.push(payload);
 
   // Write db.data content to db.json
@@ -55,8 +62,6 @@ async function resetDB() {
   // If file.json doesn't exist, db.data will be null
   // Set default data
   db.data = { persons: [] };
-  const { persons } = db.data;
-  persons.push(payload);
 
   // Write db.data content to db.json
   await db.write();
@@ -73,3 +78,4 @@ async function runGeneration() {
 }
 
 runGeneration();
+//resetDB();
