@@ -1,9 +1,9 @@
-import { Low, JSONFile } from "lowdb";
-import createQRCode from "./apis/qrCode.js";
+import { Low, JSONFile } from 'lowdb';
+import createQRCode from './apis/qrCode.js';
 
 async function generateQRCodes() {
   // Use JSON file for storage
-  const file = "./_data/db.json";
+  const file = './_data/db.json';
   const adapter = new JSONFile(file);
   const db = new Low(adapter);
 
@@ -20,9 +20,12 @@ async function generateQRCodes() {
     createQRCode(entry.id);
   });
 }
+async function runGeneration() {
+  //Run data Generation.
+  const starttime = Date.now();
+  generateQRCodes();
+  const endtime = Date.now();
+  console.log('Time elapsed: ' + (endtime - starttime) / 1000 + 's.');
+}
 
-//Run data Generation.
-const starttime = Date.now();
-generateQRCodes();
-const endtime = Date.now();
-console.log("Time elapsed: " + (endtime - starttime) / 1000 + "s.");
+runGeneration();
