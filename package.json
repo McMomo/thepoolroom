@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/McMomo/thepoolroom#readme",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "qrcode": "^1.5.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.1",
