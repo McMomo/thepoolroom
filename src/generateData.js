@@ -1,8 +1,6 @@
 import getPersonalData from "./apis/personalData.js";
-import { join, dirname } from "path";
 import { Low, JSONFile } from "lowdb";
-import { fileURLToPath } from "url";
-import { timeStamp } from "console";
+import getFaces from "./apis/faces.js";
 
 let totalEntries = 0;
 const targetEntries = 10;
@@ -20,6 +18,7 @@ async function generateData() {
   // Set default data
   db.data = db.data || { persons: [] };
 
+  //Check Amount of DB entries and log the result
   totalEntries = Object.keys(db.data.persons).length;
   console.log(
     "Total Entries: " +
@@ -28,7 +27,13 @@ async function generateData() {
       parseInt((totalEntries / targetEntries) * 100) +
       "% done."
   );
-  const payload = await getPersonalData("male");
+
+  //get a random face image
+  const face = getFaces();
+
+  //generate personal Data json
+  //TODO: Facial Recognition
+  const payload = await getPersonalData("male", 21, 56, face);
 
   // You can also use this syntax if you prefer
   const { persons } = db.data;
@@ -38,7 +43,7 @@ async function generateData() {
   await db.write();
 }
 
-//Run dataGeneration.
+//Run data Generation.
 const starttime = Date.now();
 while (totalEntries < targetEntries) {
   await generateData();

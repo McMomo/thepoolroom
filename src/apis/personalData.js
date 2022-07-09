@@ -2,7 +2,7 @@ import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { randomUUID } from "crypto";
 
-const getData = async (gender, minAge = 17, maxAge = 42) => {
+const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   const person = {
     main: {},
     contact: {},
@@ -56,7 +56,7 @@ const getData = async (gender, minAge = 17, maxAge = 42) => {
   person.interests["favoriteSong"] = faker.music.songName();
   const food = await getRandomData("/food/random_food");
   person.interests["favoriteDish"] = food.description;
-
+  person["imgURI"] = imgURI;
   console.log(person);
 };
 

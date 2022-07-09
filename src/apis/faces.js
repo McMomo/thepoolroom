@@ -7,7 +7,7 @@
 
 import axios from "axios";
 
-async function getFaces(amount) {
+async function getFaces(amount = 1) {
   let response = [];
   for (let i = 0; i < amount; i++) {
     try {
