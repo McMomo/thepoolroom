@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Art project for friends",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "generateData": "node --experimental-modules ./src/generateData.js"
+    "generateData": "node --experimental-modules ./src/generateData.js",
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
   },
   "repository": {
     "type": "git",

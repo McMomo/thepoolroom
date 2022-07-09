@@ -2,7 +2,7 @@ import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { randomUUID } from "crypto";
 
-const getData = async (gender, minAge = 17, maxAge = 42) => {
+async function getData(gender, minAge = 17, maxAge = 42) {
   const person = {
     main: {},
     contact: {},
@@ -25,7 +25,6 @@ const getData = async (gender, minAge = 17, maxAge = 42) => {
   person.contact["address"] = faker.address.streetAddress(true);
   person.contact["email"] = faker.internet.email(firstName, lastName);
   person.contact["phone"] = faker.phone.number();
-  person.contact["username"] = faker.internet.userName(firstName, lastName);
 
   const company = (person.employment["company"] = faker.company.companyName());
   const companyDomain =
@@ -45,6 +44,8 @@ const getData = async (gender, minAge = 17, maxAge = 42) => {
 
   const bloodGroup = await getRandomData("/blood/random_blood");
   person.personalData["bloodGroup"] = bloodGroup.group;
+  person.personalData["gender"] = gender;
+  person.personalData["age"] = minAge; //FIXME
 
   const favAnimal = faker.animal.type();
   person.interests["favoriteAnimal"] =
@@ -56,9 +57,11 @@ const getData = async (gender, minAge = 17, maxAge = 42) => {
   person.interests["favoriteSong"] = faker.music.songName();
   const food = await getRandomData("/food/random_food");
   person.interests["favoriteDish"] = food.description;
+  person.interests["username"] = faker.internet.userName(firstName, lastName);
 
-  console.log(person);
-};
+  // console.log(person);
+  return person;
+}
 
 const getRandomData = async (url) => {
   const baseUrl = "https://random-data-api.com/api";

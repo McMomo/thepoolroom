@@ -106,6 +106,7 @@ dist
 
 # 11ty
 _site
+public
 
 # output files
 output/
