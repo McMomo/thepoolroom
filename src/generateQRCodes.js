@@ -1,17 +1,17 @@
-import { Low, JSONFile } from 'lowdb';
-import createQRCode from './apis/qrCode.js';
+import { Low, JSONFile } from "lowdb";
+import createQRCode from "./apis/qrCode.js";
 
 async function generateQRCodes() {
   const starttime = Date.now();
   try {
     // Use JSON file for storage
-    const file = './_data/db.json';
+    const file = "./_data/db.json";
     const adapter = new JSONFile(file);
     const db = new Low(adapter);
 
     // Read data from JSON file, this will set db.data content
-    await db.read()
-    
+    await db.read();
+
     const size = Object.keys(db.data.persons).length;
     let persons = db.data.persons;
 
@@ -25,16 +25,20 @@ async function generateQRCodes() {
 
     for (let i = 0; i < size; i++) {
       //Generate QR Code name
-      let name = '';
+      let name = "";
       if (nbr < 10) {
-        name = String.fromCodePoint(char) + '0' + nbr;
+        name = String.fromCodePoint(char) + "0" + nbr;
       } else {
-        name = String.fromCodePoint(char) + '' + nbr;
+        name = String.fromCodePoint(char) + "" + nbr;
       }
 
       //Create QR Code with the size of 512 & 1024
       await createQRCode(persons[i].id, 512, name);
       await createQRCode(persons[i].id, 1024, name);
+
+      console.log(
+        i + "/" + size + " -----> " + parseInt((i / size) * 100) + "% done."
+      );
 
       nbr++;
       if (nbr == 100) {
@@ -48,7 +52,7 @@ async function generateQRCodes() {
 
   //Print total generation time
   const endtime = Date.now();
-  console.log('Time elapsed: ' + (endtime - starttime) / 1000 + 's.');
+  console.log("Time elapsed: " + (endtime - starttime) / 1000 + "s.");
 }
 
 generateQRCodes();

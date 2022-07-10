@@ -14,14 +14,14 @@ async function getFaces(amount = 1) {
       await axios
         .get("https://100k-faces.glitch.me/random-image-url")
         .then((resp) => {
-          console.log(resp.data)
+          console.log(resp.data);
           response.push(resp.data.url);
         });
     } catch (err) {
       console.log("An error has occoured while generating faces", err);
     }
   }
-  return response
+  return response;
 }
 
 export default getFaces;

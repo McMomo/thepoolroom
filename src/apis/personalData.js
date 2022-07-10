@@ -1,7 +1,7 @@
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { randomUUID } from "crypto";
-
+//TODO remove profession & credit card info if person is under 18yo
 const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   const person = {
     main: {},
@@ -62,6 +62,7 @@ const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   person.interests["username"] = faker.internet.userName(firstName, lastName);
   person["imgURI"] = imgURI;
   return person;
+};
 
 const getRandomData = async (url) => {
   const baseUrl = "https://random-data-api.com/api";
