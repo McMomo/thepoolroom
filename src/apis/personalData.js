@@ -26,9 +26,9 @@ const getData = async (gender, minAge = 18, maxAge = 42, imgURI) => {
   }
   person.main["birthdate"] = birthdate.toLocaleDateString('en-US', dateOptions);
   const personAge = getAge(birthdate);
-  person.main["entryCreated"] = faker.date.between(new Date(birthdate).setYear(2000), new Date())
+  person.main["entryCreated"] = new Date(faker.date.between(new Date(birthdate).setYear(2000), new Date())).toLocaleDateString('en-US', dateOptions)
   person.main["visitors"] = faker.random.numeric(5)
-  person.main["lastVisited"] = faker.date.between(person.main.entryCreated, new Date())
+  person.main["lastVisited"] = new Date(faker.date.between(person.main.entryCreated, new Date())).toLocaleDateString('en-US', dateOptions)
 
   person.contact["address"] = faker.address.streetAddress(true);
   person.contact["city"] = faker.address.cityName();

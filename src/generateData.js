@@ -4,8 +4,8 @@ import getFaces from "./apis/faces.js";
 import facialRecognition from "./services/facialRecognition.js"
 
 let totalEntries = 0;
-const TARGET_ENTRIES = 21;
-const MIN_CONF = 0.7;
+const TARGET_ENTRIES = 10;
+const MIN_CONF = 0.8;
 
 let i = 0;
 
@@ -20,7 +20,7 @@ async function generateData() {
   await db.read();
   const starttime = Date.now();
 
-  const index = 0;
+  let index = 0;
 
   // If file.json doesn't exist, db.data will be null
   // Set default data
@@ -53,7 +53,7 @@ async function generateData() {
         console.log(payload);
         persons.push(payload);
         index++;
-        if (index % 5 === 0){
+        if (index % 10 === 0){
           console.log("Write db.data content to db.json")
           await db.write();
         }

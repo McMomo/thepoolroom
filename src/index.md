@@ -5,7 +5,9 @@ templateEngineOverride: njk,md
 ---
 
 <ul>
-  {%- for person in persons %}
-  <li>{{ person.main.firstName }}{{ person.main.firstName }}</li>
+  {%- for person in persons.persons %}
+  <li>
+    <a href="{{person.id}}.html">{{person.main.firstName}}<a/>
+  </li>
   {% endfor -%}
 </ul>

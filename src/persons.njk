@@ -1,6 +1,6 @@
 ---
 pagination:
-  data: persons
+  data: persons.persons
   size: 1
   alias: person
 permalink: '/{{ person.id | slug }}.html'
@@ -25,10 +25,10 @@ body {
 <section class="firstRow">
     <img class="image" src={{person.imgURI}} alt="A image of a person who dont exist.">
     <div class="mainData">
-        <h2>{{ person.main.firstName }}</h2>
-        <p>Entry created: <br/>{{person.main.birthdate}}</p>
-        <p>Entry accessed: <br/>{{person.main.birthdate}}</p>
-        <p>Last accessed: <br/>{{person.main.birthdate}}</p>
+        <h2>{{ person.main.firstName }} {{person.main.lastName}}</h2>
+        <p>Entry created: <br/>{{person.main.entryCreated}}</p>
+        <p>Visitors: <br/>{{person.main.visitors}}</p>
+        <p>Last visited: <br/>{{person.main.lastVisited}}</p>
         <p>Date of birth: <br/>{{person.main.birthdate}}</p>
     </div>
 </section>
@@ -40,9 +40,15 @@ body {
         <img src="./assets/001-phone-call.png" alt="A icon of a old phone"/>
         <p>{{person.contact.phone}}</p>
         <img src="./assets/005-home.png" alt="A icon of a house"/>
-        <p>{{person.contact.address}}</p>
+        <div class="address">
+            <p>{{person.contact.street}}</p>
+            <p>{{person.contact.houseNumber}}</p>
+            <p>{{person.contact.zip}}</p>
+            <p>{{person.contact.city}}</p>
+        </div>
     </div>
 </section>
+{% if person.personalData.age > 17 %}
 <section>
     <h3>Employment</h3>
     <div class="table">
@@ -56,6 +62,7 @@ body {
         {% endfor %}
     </div>
 </section>
+{% endif %}
 <section>
     <h3>Personal data</h3>
     <div class="table">

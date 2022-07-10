@@ -65,6 +65,13 @@ p {
   margin: 0;
 }
 
+.address{
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 0;
+  place-items: baseline;
+}
+
 .table {
   display: grid;
   grid-template-columns: auto auto;
