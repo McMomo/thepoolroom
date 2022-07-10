@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Art project for friends",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "generateData": "node --experimental-modules ./src/generateData.js"
+    "generateData": "node -r esm ./src/generateData.js",
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "lowdb": "^3.0.0",
+    "esm": "^3.2.25",
     "qrcode": "^1.5.0"
   },
   "devDependencies": {

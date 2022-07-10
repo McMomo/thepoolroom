@@ -16,16 +16,17 @@ const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   const lastName = faker.name.lastName(gender);
   person.main["lastName"] = lastName;
   person.main["prefix"] = faker.name.prefix(gender);
+  //TODO change date format
   person.main["birthdate"] = faker.date.birthdate({
     min: minAge,
     max: maxAge,
     mode: "age",
   });
 
+  //TODO change to single entrys for city street etc.
   person.contact["address"] = faker.address.streetAddress(true);
   person.contact["email"] = faker.internet.email(firstName, lastName);
-  person.contact["phone"] = faker.phone.number();
-  person.contact["username"] = faker.internet.userName(firstName, lastName);
+  person.contact["phone"] = faker.phone.number("01## ## ### ##");
 
   const company = (person.employment["company"] = faker.company.companyName());
   const companyDomain =
@@ -39,12 +40,14 @@ const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   person.employment["area"] = faker.name.jobArea();
 
   const creditCardIssuer = faker.finance.creditCardIssuer();
-  person.employment["creditCardIssuer"] = creditCardIssuer;
-  person.employment["creditCardNumber"] =
+  person.personalData["creditCardIssuer"] = creditCardIssuer;
+  person.personalData["creditCardNumber"] =
     faker.finance.creditCardNumber(creditCardIssuer);
 
   const bloodGroup = await getRandomData("/blood/random_blood");
   person.personalData["bloodGroup"] = bloodGroup.group;
+  person.personalData["gender"] = gender;
+  person.personalData["age"] = minAge; //FIXME
 
   const favAnimal = faker.animal.type();
   person.interests["favoriteAnimal"] =
@@ -56,14 +59,14 @@ const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   person.interests["favoriteSong"] = faker.music.songName();
   const food = await getRandomData("/food/random_food");
   person.interests["favoriteDish"] = food.description;
+  person.interests["username"] = faker.internet.userName(firstName, lastName);
   person["imgURI"] = imgURI;
-  console.log(person);
-};
+  return person;
 
 const getRandomData = async (url) => {
   const baseUrl = "https://random-data-api.com/api";
   const res = await axios.get(baseUrl + url);
-  return res?.data;
+  return res.data;
 };
 
 export default getData;
