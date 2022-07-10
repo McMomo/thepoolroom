@@ -13,7 +13,7 @@ const facialRecognition = async (imageUrl) => {
       resolve(data.toString());
     });
   }).then((data) => {
-    dataToSend = data;
+    dataToSend = JSON.parse(data);
   });
 
   // in close event we are sure that stream from child process is closed

@@ -57,15 +57,15 @@ def age_gender_detector(frame):
         genderPreds = genderNet.forward()
         gender = genderList[genderPreds[0].argmax()]
         # print("Gender Output : {}".format(genderPreds))
-        print("Gender : {}, conf = {:.3f}".format(gender, genderPreds[0].max()))
+        print("\"Gender\": \"{}\", \"conf\": \"{:.3f}\",".format(gender, genderPreds[0].max()))
         ageNet.setInput(blob)
     agePreds = ageNet.forward()
     age = ageList[agePreds[0].argmax()]
-    print("Age Output : {}".format(agePreds))
-    print("Age : {}, conf = {:.3f}".format(age, agePreds[0].max()))
+    # print("Age Output : {}".format(agePreds))
+    print("\"Age\": \"{}\", \"conf\": \"{:.3f}\"".format(age, agePreds[0].max()))
     label = "{},{}".format(gender, age)
     cv.putText(frameFace, label, (bbox[0], bbox[1]-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
-    return age
+    # return age
 
 def url_to_img(url, save_as=''):
   img = Image.open(BytesIO(requests.get(url).content))
@@ -78,6 +78,9 @@ import urllib.request
 urllib.request.urlretrieve(sys.argv[1], "./src/services/content/tempImage.jpg")
 
 input = cv.imread("./src/services/content/tempImage.jpg")
-output = age_gender_detector(input)
-print(output)
+print("{")
+# output = age_gender_detector(input)
+age_gender_detector(input)
+# print(output)
+print("}")
 sys.exit(0)
