@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "generateData": "node --experimental-modules ./src/generateData.js",
+    "generateData": "node -r esm ./src/generateData.js",
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy"
   },
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/McMomo/thepoolroom#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "esm": "^3.2.25",
     "qrcode": "^1.5.0"
   },
   "devDependencies": {

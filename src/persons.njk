@@ -5,19 +5,86 @@ pagination:
   alias: person
 permalink: '/{{ person.id | slug }}.html'
 layout: base.njk
+fav-color: {{person.interests.favoriteColor}}
 ---
 
-  <div class="firstRow">
+<style>
+body {
+  background-color: {{person.interests.favoriteColor | addOpacity}};
+}
+.contactBorder {
+  border: 2px solid {{person.interests.favoriteColor}};
+}
+.contact h3 {
+  background-color: {{person.interests.favoriteColor}};
+}
+.contact img {
+  filter: opacity(0.5);
+}
+</style>
+<section class="firstRow">
     <img class="image" src="https://placedog.net/500" alt="A image of a person who dont exist.">
     <div class="mainData">
         <h2>{{ person.main.firstName }}</h2>
-        <p>Entry created: {{person.main.birthdate}}</p>
-          <p>Entry accessed: {{person.main.birthdate}}</p>
-        <p>Last accessed: {{person.main.birthdate}}</p>
-        <p>Date of birth: {{person.main.birthdate}}</p>
+        <p>Entry created: <br/>{{person.main.birthdate}}</p>
+        <p>Entry accessed: <br/>{{person.main.birthdate}}</p>
+        <p>Last accessed: <br/>{{person.main.birthdate}}</p>
+        <p>Date of birth: <br/>{{person.main.birthdate}}</p>
     </div>
-  </div>
-  <div class="contact">
+</section>
+<section class="contact contactBorder">
     <h3>Contacting {{ person.main.firstName }}</h3>
-
-  </div>
+    <div class="table">
+        <img src="./assets/002-arroba.png" alt="A icon of a @-symbol"/>
+        <p>{{person.contact.email}}</p>
+        <img src="./assets/001-phone-call.png" alt="A icon of a old phone"/>
+        <p>{{person.contact.phone}}</p>
+        <img src="./assets/005-home.png" alt="A icon of a house"/>
+        <p>{{person.contact.address}}</p>
+    </div>
+</section>
+<section>
+    <h3>Employment</h3>
+    <div class="table">
+        {% for name, item in person.employment %}
+            <p>
+                {{ name | makeBetterNames }}:
+            </p>
+            <p>
+                {{item}}
+            </p>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <h3>Personal data</h3>
+    <div class="table">
+        {% for name, item in person.personalData %}
+            <p>
+                {{ name | makeBetterNames }}:
+            </p>
+            <p>
+                {{item}}
+            </p>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <h3>Interests</h3>
+    <div class="table">
+        {% for name, item in person.interests %}
+            {% if name !== "favoriteColor" %}
+                <p>
+                    {{ name | makeBetterNames }}:
+                </p>
+                <p>
+                    {{ item | makeFirstUpperCase }}
+                </p>
+            {% endif %}
+        {% endfor %}
+        <p>
+            Favorite Color:
+        </p>
+        <div class="color-box" style="background-color: {{person.interests.favoriteColor}};"></div>
+    </div>
+</section>
