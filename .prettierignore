@@ -1,0 +1,11 @@
+# output files
+output/
+
+# venv binarys
+src/services/bin
+src/services/lib
+src/services/lib64
+src/services/share
+
+# machine learning data
+src/services/content
