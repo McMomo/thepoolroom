@@ -36,8 +36,8 @@ genderProto = "./src/services/content/gender_deploy.prototxt"
 genderModel = "./src/services/content/gender_net.caffemodel"
 
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
-ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
-genderList = ['Male', 'Female']
+ageList = ['0-2', '4-6', '8-12', '15-20', '25-32', '38-43', '48-53', '60-100']
+genderList = ['male', 'female']
 
 # Load networkageNet = cv.dnn.readNet(ageModel, ageProto)
 genderNet = cv.dnn.readNet(genderModel, genderProto)
@@ -57,12 +57,12 @@ def age_gender_detector(frame):
         genderPreds = genderNet.forward()
         gender = genderList[genderPreds[0].argmax()]
         # print("Gender Output : {}".format(genderPreds))
-        print("\"gender\": \"{}\", \"conf\": \"{:.3f}\",".format(gender, genderPreds[0].max()))
+        print("\"gender\": \"{}\", \"genderConf\": \"{:.3f}\",".format(gender, genderPreds[0].max()))
         ageNet.setInput(blob)
     agePreds = ageNet.forward()
     age = ageList[agePreds[0].argmax()]
     # print("Age Output : {}".format(agePreds))
-    print("\"age\": \"{}\", \"conf\": \"{:.3f}\"".format(age, agePreds[0].max()))
+    print("\"age\": \"{}\", \"ageConf\": \"{:.3f}\"".format(age, agePreds[0].max()))
     label = "{},{}".format(gender, age)
     cv.putText(frameFace, label, (bbox[0], bbox[1]-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
     # return age

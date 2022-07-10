@@ -1,8 +1,8 @@
-const { spawn } = require("child_process");
+import { spawn } from "child_process";
 
 const facialRecognition = async (imageUrl) => {
-  var dataToSend;
-  var args = [imageUrl];
+  let dataToSend;
+  let args = [imageUrl];
 
   // spawn new child process to call the python script
   const python = spawn("python3", ["./src/services/facerecognition.py", args]);

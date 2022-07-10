@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "pretty": "prettier --write ./",
-    "generateData": "node -r esm ./src/generateData.js",
+    "generateData": "node --experimental-modules ./src/generateData.js",
     "generateQR": "node -r esm ./src/generateQRCodes.js",
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy"

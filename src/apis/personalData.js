@@ -1,8 +1,8 @@
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { randomUUID } from "crypto";
-//TODO remove profession & credit card info if person is under 18yo
-const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
+
+const getData = async (gender, minAge = 18, maxAge = 42, imgURI) => {
   const person = {
     main: {},
     contact: {},
@@ -16,38 +16,50 @@ const getData = async (gender, minAge = 17, maxAge = 42, imgURI) => {
   const lastName = faker.name.lastName(gender);
   person.main["lastName"] = lastName;
   person.main["prefix"] = faker.name.prefix(gender);
-  //TODO change date format
-  person.main["birthdate"] = faker.date.birthdate({
+  const birthdate =  new Date(faker.date.birthdate({
     min: minAge,
     max: maxAge,
     mode: "age",
-  });
+  }))
+  const dateOptions = {
+    year: 'numeric', month: 'numeric', day: 'numeric'
+  }
+  person.main["birthdate"] = birthdate.toLocaleDateString('en-US', dateOptions);
+  const personAge = getAge(birthdate);
+  person.main["entryCreated"] = faker.date.between(new Date(birthdate).setYear(2000), new Date())
+  person.main["visitors"] = faker.random.numeric(5)
+  person.main["lastVisited"] = faker.date.between(person.main.entryCreated, new Date())
 
-  //TODO change to single entrys for city street etc.
   person.contact["address"] = faker.address.streetAddress(true);
+  person.contact["city"] = faker.address.cityName();
+  person.contact["zip"] = faker.address.zipCode("#####");
+  person.contact["street"] = faker.address.street();
+  person.contact["houseNumber"] = faker.random.numeric(3)
+
   person.contact["email"] = faker.internet.email(firstName, lastName);
   person.contact["phone"] = faker.phone.number("01## ## ### ##");
 
-  const company = (person.employment["company"] = faker.company.companyName());
-  const companyDomain =
-    company.replaceAll(/[^\w\s]/gi, "").replaceAll(" ", "-") + ".com";
-  person.employment["email"] = faker.internet.email(
-    firstName,
-    lastName,
-    companyDomain
-  );
-  person.employment["profession"] = faker.name.jobTitle();
-  person.employment["area"] = faker.name.jobArea();
-
-  const creditCardIssuer = faker.finance.creditCardIssuer();
-  person.personalData["creditCardIssuer"] = creditCardIssuer;
-  person.personalData["creditCardNumber"] =
-    faker.finance.creditCardNumber(creditCardIssuer);
-
   const bloodGroup = await getRandomData("/blood/random_blood");
-  person.personalData["bloodGroup"] = bloodGroup.group;
+  person.personalData["age"] = personAge;
   person.personalData["gender"] = gender;
-  person.personalData["age"] = minAge; //FIXME
+  person.personalData["bloodGroup"] = bloodGroup.group;
+
+  if (personAge > 17){
+    const company = (person.employment["company"] = faker.company.companyName());
+    const companyDomain = company.replaceAll(/[^\w\s]/gi, "").replaceAll(" ", "-") + ".com";
+    person.employment["email"] = faker.internet.email(
+      firstName,
+      lastName,
+      companyDomain
+    );
+    person.employment["profession"] = faker.name.jobTitle();
+    person.employment["area"] = faker.name.jobArea();
+
+    const creditCardIssuer = faker.finance.creditCardIssuer();
+    person.personalData["creditCardIssuer"] = creditCardIssuer;
+    person.personalData["creditCardNumber"] =
+    faker.finance.creditCardNumber(creditCardIssuer);
+  }
 
   const favAnimal = faker.animal.type();
   person.interests["favoriteAnimal"] =
@@ -69,5 +81,11 @@ const getRandomData = async (url) => {
   const res = await axios.get(baseUrl + url);
   return res.data;
 };
+
+const getAge = (birthday) => {
+  const ageDifMs = Date.now() - birthday.getTime();
+  const ageDate = new Date(ageDifMs); // miliseconds from epoch
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
 
 export default getData;
