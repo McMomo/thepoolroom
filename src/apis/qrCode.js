@@ -1,18 +1,23 @@
-import QRCode from "qrcode";
+import QRCode from 'qrcode';
+
 
 //Create QR Code by giving it the id of a dataset. Output file will be saved to /output/qrcodes
-function createQRCode(id) {
-  const baseURI = "https://poolroom.neocities.org/";
+async function createQRCode(id, size, name) {
+  const baseURI = 'https://poolroom.neocities.org/';
   // With promises
-  QRCode.toFile("../../output/qrcodes/" + id + ".svg", baseURI + id, {
-    errorCorrectionLevel: "H",
-  })
-    .then((url) => {
-      console.log(url);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  await QRCode.toFile(
+    '../../output/qrcodes/' + size + '/' + name + '.png',
+    baseURI + id,
+    {
+      errorCorrectionLevel: 'H',
+      width: size,
+      height: size,
+    },
+    function (err) {
+      if (err) throw err;
+      console.log('done');
+    }
+  );
 }
 
 export default createQRCode;

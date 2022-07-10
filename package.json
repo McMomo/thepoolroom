@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "Art project for friends",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
     "generateData": "node -r esm ./src/generateData.js",
+    "generateQR": "node -r esm ./src/generateQRCodes.js",
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy"
   },
