@@ -5,9 +5,9 @@ The files are displayed as static generated Sites under https://poolroom.neociti
 
 ## Example
 
-|                            ![sampleFile.png](./things/sampleFile.png)                             |
+|                            ![sampleFile.png](./misc/sampleFile.png)                             |
 | :-----------------------------------------------------------------------------------------------: |
-| <b>_Jeanette King - https://poolroom.neocities.org/b0d1aabe-60fe-4889-9ee6-623bd0eddb95.html_</b> |
+| <b>_Wilbert Kiehn - https://poolroom.neocities.org/c9e7caa1-1ac2-4017-8d09-c0296174e8e9.html_</b> |
 
 An overview of all generated Sites can be found under https://poolroom.neocities.org/.
 
