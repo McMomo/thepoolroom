@@ -1,7 +1,7 @@
 # thepoolroom
 
 An Art project for friends to generate fake images and matching personal data for a personnal file. <br/>
-The files are displayed as static generated Sites under https://poolroom.neocities.org/*.
+The files are displayed as static generated Sites under https://poolroom.neocities.org/*. The simple Style of the pages is inspired by _myspace_ pages.
 
 ## Example
 
